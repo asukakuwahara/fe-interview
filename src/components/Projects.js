@@ -1,17 +1,52 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components/macro";
 import { ProjectCard } from "./card/Project";
 import { projects } from "../data";
 export default function Projects() {
+  const [data, setData] = useState([]);
+  const [query, setQuery] = useState("");
+  const [tag, setTag] = useState([]);
+
+  const handleChange = (e) => {
+    console.log(e.target.value);
+    setQuery(e.target.value);
+  };
+
+  const onEnter = (e) => {
+    if (e.key === "Enter") {
+      setTag([...tag, query]);
+    }
+  };
+
+  useEffect(() => {
+    const filteredResult = projects.filter((project) =>
+      project.name.toLowerCase().includes(query.toLowerCase())
+    );
+    setData(filteredResult);
+  }, [query]);
+
+  useEffect(() => {
+    console.log(tag);
+  }, [tag]);
+
   return (
     <Wrapper $area="content">
       <Title $area="title">Projects</Title>
-      <Search $area="search" placeholder="Start typing to search..." />
+      <Search
+        type="text"
+        $area="search"
+        placeholder="Start typing to search..."
+        value={query}
+        onChange={handleChange}
+        onKeyDown={onEnter}
+      />
       {/* TODO: Use ProjectsList to host Project components OR create your own container */}
       <ProjectsList $area="projects">
-        {projects.map((project) => (
-          <ProjectCard {...project} key={project.id} />
-        ))}
+        {data.length ? (
+          data.map((project) => <ProjectCard {...project} key={project.id} />)
+        ) : (
+          <h2>Nothing found</h2>
+        )}
       </ProjectsList>
     </Wrapper>
   );
