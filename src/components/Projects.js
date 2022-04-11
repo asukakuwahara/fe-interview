@@ -5,7 +5,7 @@ import { projects } from "../data";
 export default function Projects() {
   const [data, setData] = useState([]);
   const [query, setQuery] = useState("");
-  const [tag, setTag] = useState([]);
+  const [tags, setTags] = useState([]);
 
   const handleChange = (e) => {
     console.log(e.target.value);
@@ -14,7 +14,7 @@ export default function Projects() {
 
   const onEnter = (e) => {
     if (e.key === "Enter") {
-      setTag([...tag, query]);
+      setTags([...tags, query]);
     }
   };
 
@@ -26,20 +26,25 @@ export default function Projects() {
   }, [query]);
 
   useEffect(() => {
-    console.log(tag);
-  }, [tag]);
+    console.log(tags);
+  }, [tags]);
 
   return (
     <Wrapper $area="content">
       <Title $area="title">Projects</Title>
-      <Search
-        type="text"
-        $area="search"
-        placeholder="Start typing to search..."
-        value={query}
-        onChange={handleChange}
-        onKeyDown={onEnter}
-      />
+      <Tags>
+        {tags.map((tag) => (
+          <Tag>{tag}</Tag>
+        ))}
+        <Search
+          type="text"
+          $area="search"
+          placeholder="Start typing to search..."
+          value={query}
+          onChange={handleChange}
+          onKeyDown={onEnter}
+        />
+      </Tags>
       {/* TODO: Use ProjectsList to host Project components OR create your own container */}
       <ProjectsList $area="projects">
         {data.length ? (
@@ -51,6 +56,19 @@ export default function Projects() {
     </Wrapper>
   );
 }
+
+const Tags = styled.div`
+  grid-area: ${({ $area }) => $area};
+  border: 1px solid black;
+  display: flex;
+`;
+
+const Tag = styled.div`
+  background: #add8e6;
+  margin: 5px;
+  padding: 0 5px;
+  text-align: center;
+`;
 
 const Wrapper = styled.main`
   grid-area: ${({ $area }) => $area};
@@ -67,8 +85,8 @@ const Title = styled.h1`
 `;
 
 const Search = styled.input`
-  grid-area: ${({ $area }) => $area};
   margin: 0 20px;
+  border: none;
 `;
 
 const ProjectsList = styled.article`
