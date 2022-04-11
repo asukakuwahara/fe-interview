@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components/macro";
+import { ProjectCard } from "./card/Project";
 
 export default function Projects() {
   return (
@@ -7,6 +8,7 @@ export default function Projects() {
       <Title $area="title">Projects</Title>
       <Search $area="search" placeholder="Start typing to search..." />
       {/* TODO: Use ProjectsList to host Project components OR create your own container */}
+      <ProjectCard />
       <ProjectsList $area="projects">Display projects here...</ProjectsList>
     </Wrapper>
   );
