@@ -8,14 +8,18 @@ export default function Projects() {
   const [tags, setTags] = useState([]);
 
   const handleChange = (e) => {
-    console.log(e.target.value);
     setQuery(e.target.value);
   };
 
-  const onEnter = (e) => {
-    if (e.key === "Enter") {
+  const handleEnter = (e) => {
+    if (e.key === "Enter" && query.length) {
       setTags([...tags, query]);
     }
+  };
+
+  const handleDeleteTag = (selectedTag) => {
+    const filteredTags = tags.filter((tag) => tag !== selectedTag);
+    setTags(filteredTags);
   };
 
   useEffect(() => {
@@ -26,6 +30,7 @@ export default function Projects() {
   }, [query]);
 
   useEffect(() => {
+    // Do something with the tags here
     console.log(tags);
   }, [tags]);
 
@@ -34,7 +39,10 @@ export default function Projects() {
       <Title $area="title">Projects</Title>
       <Tags>
         {tags.map((tag) => (
-          <Tag>{tag}</Tag>
+          <Tag>
+            {tag}
+            <DeleteButton onClick={() => handleDeleteTag(tag)}>X</DeleteButton>
+          </Tag>
         ))}
         <Search
           type="text"
@@ -42,7 +50,7 @@ export default function Projects() {
           placeholder="Start typing to search..."
           value={query}
           onChange={handleChange}
-          onKeyDown={onEnter}
+          onKeyDown={handleEnter}
         />
       </Tags>
       {/* TODO: Use ProjectsList to host Project components OR create your own container */}
@@ -70,6 +78,11 @@ const Tag = styled.div`
   text-align: center;
 `;
 
+const DeleteButton = styled.button`
+  background: #add8e6;
+  border: none;
+`;
+
 const Wrapper = styled.main`
   grid-area: ${({ $area }) => $area};
   display: grid;
@@ -93,7 +106,7 @@ const ProjectsList = styled.article`
   grid-area: ${({ $area }) => $area};
   margin-top: 15px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(800px, 1fr));
+  grid-auto-columns: 1fr;
   justify-items: center;
 }
 `;
