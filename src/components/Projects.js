@@ -1,15 +1,18 @@
 import React from "react";
 import styled from "styled-components/macro";
 import { ProjectCard } from "./card/Project";
-
+import { projects } from "../data";
 export default function Projects() {
   return (
     <Wrapper $area="content">
       <Title $area="title">Projects</Title>
       <Search $area="search" placeholder="Start typing to search..." />
       {/* TODO: Use ProjectsList to host Project components OR create your own container */}
-      <ProjectCard />
-      <ProjectsList $area="projects">Display projects here...</ProjectsList>
+      <ProjectsList $area="projects">
+        {projects.map((project) => (
+          <ProjectCard {...project} key={project.id} />
+        ))}
+      </ProjectsList>
     </Wrapper>
   );
 }
@@ -36,4 +39,8 @@ const Search = styled.input`
 const ProjectsList = styled.article`
   grid-area: ${({ $area }) => $area};
   margin-top: 15px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(800px, 1fr));
+  justify-items: center;
+}
 `;

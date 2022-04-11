@@ -6,7 +6,7 @@ export const projects = [
     createdDate: "2020-08-26T20:59:39.475347Z",
     template: "Anomaly Detection",
     target: "Titanium",
-    inProduction: false
+    inProduction: false,
   },
   {
     id: 2798,
@@ -15,7 +15,7 @@ export const projects = [
     createdDate: "2020-08-28T18:05:16.519857Z",
     template: null,
     target: null,
-    inProduction: false
+    inProduction: false,
   },
   {
     id: 1212,
@@ -24,7 +24,7 @@ export const projects = [
     createdDate: "2020-09-09T17:34:27.233925Z",
     template: "Forecasting",
     target: "CBS:FIC-710_PV",
-    inProduction: false
+    inProduction: false,
   },
   {
     id: 3030,
@@ -33,7 +33,7 @@ export const projects = [
     createdDate: "2020-10-08T22:13:39.475879Z",
     template: "Forecasting",
     target: "Transimission box",
-    inProduction: false
+    inProduction: false,
   },
   {
     id: 9788,
@@ -42,6 +42,6 @@ export const projects = [
     createdDate: "2020-10-21T14:05:29.890701Z",
     template: "Forecasting",
     target: "Pump 1265",
-    inProduction: false
-  }
+    inProduction: false,
+  },
 ];
