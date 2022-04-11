@@ -20,6 +20,8 @@
     Styling the card was the hardest part. This is something I would have asked better clarification before jumping into code if it were a real project, especially with font/card size, break point, and A11y concerns.
 
   Feel free to share any other notes on this assignment
+  
+  
   As I mentioned above, there are questions I would have asked beforehand if it were a real project, including the followings:
 
   - font/color/size of the text and each component
